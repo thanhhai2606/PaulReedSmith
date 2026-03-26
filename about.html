@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu | PRS Guitars VN</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #0f0f0f; color: #ffffff; overflow-x: hidden; line-height: 1.6; }
+        html { scroll-behavior: smooth; }
+
+        /* --- NAVBAR (Giữ nguyên từ index) --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 8%; background: transparent; position: fixed;
+            width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
+        }
+        .navbar.scrolled { 
+            padding: 12px 8%; 
+            background: rgba(255, 255, 255, 0.98); 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .logo-container img { height: 45px; transition: 0.3s; }
+        .navbar.scrolled .nav-links li a, .navbar.scrolled .nav-icons i { color: #000 !important; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li a { text-decoration: none; color: #fff; margin: 0 20px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-icons { color: #fff; display: flex; gap: 20px; }
+
+        /* --- ABOUT HEADER --- */
+        .about-header {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('8662207021_b4a411722f_b.jpg'); /* Bạn có thể thay link ảnh */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .about-header h1 { font-size: 3.5rem; letter-spacing: 8px; text-transform: uppercase; }
+
+        /* --- CONTENT SECTION --- */
+        .about-content { padding: 80px 15%; text-align: center; }
+        .about-content h2 { color: #c0392b; font-size: 2rem; margin-bottom: 30px; letter-spacing: 2px; }
+        .about-content p { font-size: 1.1rem; color: #ccc; margin-bottom: 20px; text-align: justify; }
+
+        .story-grid {
+            display: flex;
+            gap: 50px;
+            margin-top: 60px;
+            align-items: center;
+            text-align: left;
+        }
+        .story-image { flex: 1; }
+        .story-image img { width: 100%; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .story-text { flex: 1; }
+        .story-text h3 { font-size: 1.8rem; margin-bottom: 20px; border-left: 4px solid #c0392b; padding-left: 15px; }
+
+        /* --- FOOTER (Giữ nguyên từ index) --- */
+        .main-footer { background: #080808; padding: 80px 8% 40px; border-top: 1px solid #1a1a1a; margin-top: 50px; }
+        .footer-container { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
+        .footer-info h2 { font-size: 24px; letter-spacing: 4px; margin-bottom: 20px; }
+        .footer-info p { color: #888; margin-bottom: 30px; }
+        .social-links a { color: #fff; font-size: 20px; margin-right: 25px; transition: 0.3s; }
+        .social-links a:hover { color: #c0392b; }
+        .footer-form h3 { font-size: 16px; letter-spacing: 2px; margin-bottom: 30px; color: #fff; }
+        .footer-form input, .footer-form textarea {
+            width: 100%; padding: 15px; background: #111; border: 1px solid #222;
+            color: #fff; margin-bottom: 15px; outline: none;
+        }
+        .send-btn {
+            background: #fff; color: #000; padding: 15px 40px; border: none;
+            font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+        .send-btn:hover { background: #c0392b; color: #fff; }
+
+        @media (max-width: 768px) {
+            .story-grid { flex-direction: column; }
+            .footer-container { grid-template-columns: 1fr; gap: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNavbar">
+        <div class="logo-container"><a href="index.html"><img src="Prs_guitars_logo.png"></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="products.html">Sản Phẩm</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="#footer">Liên Hệ</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-shopping-bag"></i>
+        </div>
+    </nav>
+
+    <header class="about-header">
+        <h1>Về Chúng Tôi</h1>
+    </header>
+
+    <section class="about-content">
+        <h2>DI SẢN CỦA SỰ HOÀN HẢO</h2>
+        <p>PRS Guitars VN tự hào là điểm đến hàng đầu cho những người yêu mến dòng đàn Paul Reed Smith tại Việt Nam. Chúng tôi không chỉ bán nhạc cụ, chúng tôi chia sẻ một tác phẩm nghệ thuật được kết tinh từ đôi bàn tay của những bậc thầy làm đàn và tâm hồn của những nghệ sĩ tài hoa.</p>
+
+        <div class="story-grid">
+            <div class="story-image">
+                <img src="future-PRS-Port01@1400x1050-696x522.jpg" alt="Paul Reed Smith">
+            </div>
+            <div class="story-text">
+                <h3>Câu Chuyện Paul Reed Smith</h3>
+                <p>Khởi nguồn từ những năm 1985, Paul Reed Smith đã đặt nền móng cho một đế chế guitar điện với triết lý: "Chỉ làm ra những nhạc cụ tốt nhất". Mỗi cây đàn PRS là sự kết hợp hoàn hảo giữa vẻ đẹp gỗ quý, âm thanh đa dạng và độ ổn định tuyệt đối.</p>
+                <p>Từ những dòng SE thân thiện đến dòng Private Stock đẳng cấp, PRS luôn giữ vững vị thế là biểu tượng của sự sang trọng trong thế giới guitar.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h2>PRS GUITARS VN</h2>
+                <p>Lan tỏa đam mê, kết nối nghệ sĩ.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-form">
+                <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
+                <form action="https://formspree.io/f/your-id" method="POST">
+                    <input type="text" name="name" placeholder="Họ và tên" required>
+                    <input type="email" name="email" placeholder="Email của bạn" required>
+                    <textarea name="message" placeholder="Lời nhắn..." rows="4" required></textarea>
+                    <button type="submit" class="send-btn">GỬI THÔNG TIN</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.onscroll = function() {
+            let nav = document.getElementById('mainNavbar');
+            if (window.pageYOffset > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        };
+    </script>
+</body>
+</html>

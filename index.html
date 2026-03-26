@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRS Guitars VN | Tinh Hoa Đàn Điện</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #0f0f0f; color: #ffffff; overflow-x: hidden; }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* --- NAVBAR: ĐÃ SỬA LỖI --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 8%; background: transparent; position: fixed;
+            width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
+        }
+
+        /* Khi cuộn chuột: Nền trắng, chữ đen, logo thu nhỏ */
+        .navbar.scrolled { 
+            padding: 12px 8%; 
+            background: rgba(255, 255, 255, 0.98); 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+        }
+
+        /* Đảm bảo logo thu nhỏ lại khi cuộn */
+        .logo-container img { height: 45px; transition: 0.4s; }
+        .navbar.scrolled .logo-container img { height: 35px; filter: invert(0); } /* Đổi filter nếu logo bạn là màu trắng */
+
+        /* Đổi màu menu và icon sang đen khi nền trắng */
+        .navbar.scrolled .nav-links li a, 
+        .navbar.scrolled .nav-icons i { 
+            color: #000 !important; 
+        }
+
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li a { 
+            text-decoration: none; color: #fff; margin: 0 15px; 
+            font-size: 14px; font-weight: 600; text-transform: uppercase; 
+            transition: 0.3s;
+        }
+        
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .nav-icons i { color: #fff; font-size: 18px; cursor: pointer; transition: 0.3s; }
+        
+        .cart-count { 
+            background: #c0392b; color: #fff; font-size: 10px; 
+            padding: 2px 6px; border-radius: 50%; vertical-align: top; margin-left: -10px; 
+        }
+
+        /* --- HERO --- */
+        /* --- CẬP NHẬT HERO VỚI HÌNH ẢNH --- */
+.hero { 
+    height: 100vh; 
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('69150.jpg') center/cover; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    text-align: center; 
+    padding: 0 20px;
+}
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); letter-spacing: 5px; }
+.hero-image {
+    max-width: 80%;
+    max-height: 70vh;
+    height: auto;
+    object-fit: contain;
+    transition: 0.3s;
+    
+    /* --- ĐÂY LÀ ĐOẠN MÃ QUAN TRỌNG --- */
+    /* brightness(0) làm ảnh tối đen, sau đó invert(1) đảo ngược màu đen thành màu trắng */
+    filter: brightness(0) invert(1); 
+}
+/* Căn chỉnh lại trên mobile */
+@media (max-width: 768px) {
+    .hero-image {
+        max-width: 90%; /* Ảnh to hơn một chút trên điện thoại */
+    }
+}
+        /* --- PRODUCTS GRID (RESPONSIVE & BO GÓC) --- */
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            padding: 60px 8%;
+        }
+
+        .product-card { 
+            position: relative; overflow: hidden; aspect-ratio: 3/4; 
+            border-radius: 15px; background-color: #1a1a1a;
+        }
+
+        .product-card img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+        }
+        .product-card:hover img { transform: scale(1.1); }
+
+        /* Lớp phủ để chữ và nút nổi bật khi di chuột */
+        .product-card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+            z-index: 1; opacity: 0.8; transition: 0.3s;
+        }
+
+        .product-info { position: absolute; bottom: 85px; left: 25px; z-index: 2; }
+        .product-info h3 { font-size: 18px; font-weight: 700; text-transform: uppercase; color: #fff; }
+
+        .shop-now-btn {
+            position: absolute; bottom: 25px; left: 25px;
+            background: #fff; color: #000; padding: 12px 25px;
+            border-radius: 25px; border: none; font-weight: 700; 
+            cursor: pointer; z-index: 2; transition: 0.3s;
+            display: inline-block; 
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .navbar { padding: 15px 5%; }
+            .hero h1 { font-size: 3rem; }
+        }
+
+        /* --- SEARCH & CART --- */
+        .search-wrapper { position: fixed; top: 0; left: 0; width: 100%; background: #fff; padding: 25px 8%; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .search-wrapper.active { display: flex; align-items: center; }
+        .search-wrapper input { flex: 1; border: none; outline: none; font-size: 18px; color: #333; }
+        
+        .side-cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #1a1a1a; z-index: 3000; padding: 30px; transition: 0.4s ease; }
+        .side-cart.active { right: 0; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
+        .cart-overlay.active { display: block; }
+        /* --- CSS FOOTER --- */
+.main-footer {
+    background: #111;
+    padding: 80px 8% 20px;
+    border-top: 1px solid #222;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-info h2 {
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.footer-info p {
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 20px;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.social-links a:hover { color: #c0392b; }
+
+.footer-form h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.footer-form input, .footer-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    outline: none;
+    border-radius: 5px;
+}
+
+.footer-form input:focus, .footer-form textarea:focus {
+    border-color: #fff;
+}
+
+.send-btn {
+    background: #fff;
+    color: #000;
+    padding: 12px 30px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    background: #c0392b;
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    font-size: 12px;
+    color: #555;
+}
+
+/* Điều chỉnh cho mobile */
+@media (max-width: 768px) {
+    .main-footer { padding: 50px 5% 20px; }
+    .footer-container { gap: 30px; }
+}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNavbar">
+        <div class="logo-container"><img src="Prs_guitars_logo.png"></div>
+        <ul class="nav-links">
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="#footer-section">Liên Hệ</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div onclick="toggleCart()" style="cursor:pointer; position: relative;">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="search-wrapper" id="searchBar">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
+        <i class="fas fa-times" onclick="toggleSearch()" style="color:#000; cursor:pointer; font-size: 20px;"></i>
+    </div>
+
+    <div class="side-cart" id="sideCart">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+            <h3>GIỎ HÀNG</h3>
+            <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer;"></i>
+        </div>
+        <div id="cartContent">Trống.</div>
+    </div>
+
+    <header class="hero">
+    <img src="Prs_guitars_logo.png" alt="PRS Big Logo" class="hero-image">
+</header>
+
+    <section id="shop" class="product-grid">
+        <div class="product-card" data-name="SE Series">
+            <img src="PRS_Guitars___Modern_Eagle_V_-_2024.webp">
+            <div class="product-info"><h3>SE Series</h3></div>
+            <a href="products.html#SE-Series" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+        </div>
+        <div class="product-card" data-name="Bolt-On-Electric">
+            <img src="Fiore-HH-Midnight-Metallic_d-2048x1365.jpg">
+            <div class="product-info"><h3>Bolt On Electric</h3></div>
+            <a href="products.html#Bolt-On-Electric" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+        </div>
+        <div class="product-card" data-name="S2 Series">
+            <img src="H2_Vela_HHT.webp">
+            <div class="product-info"><h3>S2 Series</h3></div>
+            <a href="products.html#S2-Series" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+        </div>
+        <div class="product-card" data-name="SE Acoustic">
+            <img src="prs_acoutic.jpg">
+            <div class="product-info"><h3>SE Acoustic</h3></div>
+            <a href="products.html#SE-Acoustics" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+        </div>
+    </section>
+
+    <script>
+        // Xử lý Header khi cuộn
+        window.onscroll = function() {
+            let nav = document.getElementById('mainNavbar');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        function toggleSearch() { document.getElementById('searchBar').classList.toggle('active'); }
+        
+        function toggleCart() {
+            document.getElementById('sideCart').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toUpperCase();
+            let cards = document.getElementsByClassName('product-card');
+            for (let card of cards) {
+                let name = card.getAttribute('data-name').toUpperCase();
+                card.style.display = name.includes(input) ? "" : "none";
+            }
+        }
+
+        let cart = [];
+        function addToCart(name) {
+            cart.push(name);
+            document.getElementById('count').innerText = cart.length;
+            document.getElementById('cartContent').innerHTML = cart.map(i => 
+                `<p style="padding:12px; border-bottom:1px solid #333; font-size: 14px;">🎸 ${i}</p>`
+            ).join('');
+            if (!document.getElementById('sideCart').classList.contains('active')) toggleCart();
+        }
+    </script>
+    <footer class="main-footer" id="footer-section">
+    <div class="footer-container">
+        <div class="footer-info">
+            <h2>PRS GUITARS VN</h2>
+            <p>Lan tỏa đam mê, kết nối nghệ sĩ.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-form">
+            <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
+            <form action="https://formspree.io/f/wangz.thanhhai@gmail.com" method="POST">
+                <input type="text" name="name" placeholder="Họ và tên" required>
+                <input type="email" name="email" placeholder="Email của bạn" required>
+                <textarea name="message" placeholder="Lời nhắn..." rows="4" required></textarea>
+                <button type="submit" class="send-btn">GỬI THÔNG TIN</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 PRS Guitars VN. Designed by Thanh Hải.</p>
+    </div>
+</footer>
+</body>
+</html>

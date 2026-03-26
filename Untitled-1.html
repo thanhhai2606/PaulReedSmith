@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike New Collection | Experience Air</title>
+    
+    <style>
+        /* CSS STYLES */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #111;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05), transparent);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 80px;
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            list-style: none;
+            margin-left: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff4500;
+        }
+
+        /* Main Content */
+        .content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: -50px;
+        }
+
+        .text-box {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .text-box h2 {
+            color: #fff;
+            font-size: 6em;
+            line-height: 0.9em;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .text-box h2 span {
+            font-size: 0.4em;
+            font-weight: 400;
+            display: block;
+            letter-spacing: 5px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .text-box p {
+            color: #ccc;
+            margin-top: 20px;
+            font-size: 1.1em;
+            line-height: 1.6em;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 35px;
+            background: #fff;
+            color: #111;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s ease;
+        }
+
+        .btn:hover {
+            background: #ff4500;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Image Display */
+        .img-box {
+            width: 600px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .main-shoe {
+            width: 100%;
+            transform: rotate(-25deg);
+            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 30px 50px rgba(0,0,0,0.6));
+        }
+
+        /* Thumbnails */
+        .thumb {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            z-index: 10;
+        }
+
+        .thumb-item {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.4s;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .thumb-item:hover {
+            transform: translateY(-15px);
+            background: rgba(255,255,255,0.15);
+            border-color: #fff;
+        }
+
+        .thumb-item img {
+            width: 80%;
+            transform: rotate(-15deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .container { padding: 40px; }
+            .content { flex-direction: column; text-align: center; margin-top: 20px;}
+            .text-box h2 { font-size: 4em; }
+            .img-box { width: 400px; margin: 40px 0; }
+        }
+    </style>
+</head>
+<body id="bg">
+    <div class="container">
+        <nav>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" class="logo" alt="Nike">
+            <ul>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Custom</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <div class="text-box">
+                <h2>NIKE AIR <br><span>MAX PLUS OG</span></h2>
+                <p>Nâng tầm phong cách cá nhân với thiết kế hầm hố và công nghệ Tuned Air độc bản. Từng bước đi là một sự khẳng định vị thế.</p>
+                <a href="#" class="btn">Mua bộ sưu tập</a>
+            </div>
+            
+            <div class="img-box">
+                <img src="https://static.nike.com/a/images/t_default/994406a6-f28a-4977-889b-8d3810f54508/NIKE+AIR+MAX+PLUS.png" class="main-shoe" id="slider">
+            </div>
+        </div>
+
+        <div class="thumb">
+            <div class="thumb-item" onclick="changeContent('sunset', '#d35400')">
+                <img src="https://static.nike.com/a/images/t_default/994406a6-f28a-4977-889b-8d3810f54508/NIKE+AIR+MAX+PLUS.png">
+            </div>
+            <div class="thumb-item" onclick="changeContent('blue', '#2c3e50')">
+                <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9f345c2-f1d2-430c-a960-4416040f7b53/air-max-plus-shoes-p9760V.png">
+            </div>
+            <div class="thumb-item" onclick="changeContent('purple', '#4b0082')">
+                <img src="https://images.tnt-shop.com.vn/thumb_w/1200/2024/01/giay-nike-air-max-plus-og-voltage-purple-total-orange-dx0754-500-1.png">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* JAVASCRIPT LOGIC */
+        function changeContent(type, color) {
+            const slider = document.getElementById('slider');
+            const body = document.getElementById('bg');
+            
+            // Dữ liệu ảnh tương ứng
+            const images = {
+                'sunset': 'https://static.nike.com/a/images/t_default/994406a6-f28a-4977-889b-8d3810f54508/NIKE+AIR+MAX+PLUS.png',
+                'blue': 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/e9f345c2-f1d2-430c-a960-4416040f7b53/air-max-plus-shoes-p9760V.png',
+                'purple': 'https://images.tnt-shop.com.vn/thumb_w/1200/2024/01/giay-nike-air-max-plus-og-voltage-purple-total-orange-dx0754-500-1.png'
+            };
+
+            // Hiệu ứng mờ dần khi chuyển đổi
+            slider.style.opacity = '0';
+            slider.style.transform = 'rotate(-25deg) translateX(100px)';
+            
+            setTimeout(() => {
+                // Thay đổi ảnh và màu nền
+                slider.src = images[type];
+                body.style.background = color;
+                
+                // Trả lại trạng thái ban đầu với hiệu ứng xuất hiện
+                slider.style.opacity = '1';
+                slider.style.transform = 'rotate(-25deg) translateX(0)';
+            }, 300);
+        }
+    </script>
+</body>
+</html>

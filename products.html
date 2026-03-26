@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm | PRS Guitars VN</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { 
+    background-color: #0f0f0f; /* Thay đổi mã màu ở đây */
+    color: #ffffff; 
+    overflow-x: hidden; 
+}
+        html {
+            scroll-behavior: smooth;
+        }
+        #SE-Series, #S2-Series, #Bolt-On-Electric, #SE-Acoustics {
+            scroll-margin-top: 100px; 
+        }
+        /* NAVBAR */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 8%; background: white; position: fixed;
+            width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
+        }
+        /* Khi cuộn chuột: Nền trắng, chữ đen, logo thu nhỏ */
+        .navbar.scrolled { 
+            padding: 12px 8%; 
+            background: rgba(255, 255, 255, 0.98); 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
+        }
+        .logo-container img { height: 40px; }
+        .nav-links li a, .nav-icons i { color: #000000 !important; }
+        .nav-links { list-style: none; display: flex; }
+        .nav-links li a { text-decoration: none; color: #fff; margin: 0 15px; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+        .nav-icons { color: #ffffff; cursor: pointer; }
+        .cart-count { background: #c0392b; color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; vertical-align: top; margin-left: -10px; }
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .nav-icons i { color: #fff; font-size: 18px; cursor: pointer; transition: 0.3s; }
+        /* HEADER */
+        /* Đoạn mã MỚI bạn cần dán vào */
+.page-header { 
+    padding: 250px 8% 30px; 
+    text-align: center; 
+    
+    /* --- BẮT ĐẦU PHẦN SỬA ĐỔI --- */
+    /* 1. Đường dẫn tới hình ảnh của bạn */
+    background-image: url('wp10222658-prs-guitars-wallpapers.jpg'); 
+    
+    /* 2. Đảm bảo ảnh bao phủ toàn bộ khu vực mà không bị méo */
+    background-size: cover; 
+    
+    /* 3. Căn giữa hình ảnh */
+    background-position: center; 
+    
+    /* 4. Ngăn hình ảnh lặp lại nếu nó nhỏ hơn khung chứa */
+    background-repeat: no-repeat; 
+    
+    /* 5. Thiết lập màu nền dự phòng trong lúc ảnh đang tải */
+    background-color: #bcbcbc; 
+    
+    /* 6. (Tùy chọn) Thêm một lớp phủ tối để chữ nổi bật hơn */
+    position: relative; /* Cần thiết cho lớp phủ */
+}
+
+/* (Tùy chọn) Tạo lớp phủ tối (Overlay) */
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0); /* Màu đen với độ mờ 50% */
+    z-index: 1; /* Nằm dưới chữ nhưng trên ảnh nền */
+}
+
+/* Đảm bảo chữ nằm trên lớp phủ */
+.page-header h1 {
+    /* ... các mã khác giữ nguyên ... */
+    position: relative;
+    z-index: 2; /* Nằm trên cùng */
+}
+/* --- KẾT THÚC PHẦN SỬA ĐỔI --- */
+        .page-header h1 { font-size: 2.5rem; letter-spacing: 5px; text-transform: uppercase; color: #ffffff;}
+
+        /* SECTION HEADER VỚI NÚT BÊN PHẢI */
+        .section-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 8% 20px;
+            background: #0f0f0f;
+        }
+        .section-header-container h2 {
+            font-size: 22px;
+            letter-spacing: 3px;
+            color: #fff;
+            border-left: 4px solid #c0392b;
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+        .slider-controls {
+            display: flex;
+            gap: 10px;
+        }
+        .slide-btn {
+            background: #1a1a1a;
+            color: white;
+            border: 1px solid #333;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        .slide-btn:hover { background: #c0392b; border-color: #c0392b; }
+
+        /* SLIDER CONTAINER */
+        .slider-wrapper { padding: 0 8%; overflow: hidden; margin-bottom: 60px; }
+        .slider-track { 
+            display: flex; 
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
+            gap: 20px; 
+        }
+
+        .product-card {
+            min-width: calc((100% - (20px * 4)) / 5); 
+            max-width: calc((100% - (20px * 4)) / 5);
+            flex-shrink: 0;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            border: 1px solid #333;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #c0392b;
+        }
+
+        .product-image-area {
+            width: 100%;
+            height: 250px; 
+            background: #111;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .product-image-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: 20% 80%; 
+            transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .product-card:hover img { transform: scale(1.1); }
+
+        .product-info-wrapper { 
+            padding: 18px 15px; 
+            text-align: left; 
+            background: #161616;
+        }
+
+        .product-info-wrapper h3 { 
+            font-size: 15px; 
+            font-weight: 600; 
+            color: #eee; 
+            margin-bottom: 10px; 
+            height: 40px; 
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-word;
+        }
+
+        .product-price { 
+            color: #c0392b; 
+            font-weight: 700; 
+            font-size: 16px; 
+            margin-bottom: 12px;
+        }
+
+        .shop-now-btn {
+            width: 100%;
+            background: transparent;
+            color: #fff;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #444;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .shop-now-btn:hover { background: #fff; color: #000; border-color: #fff; }
+
+        /* SIDE CART */
+        .side-cart { position: fixed; top: 0; right: -400px; width: 320px; height: 100%; background: #1a1a1a; z-index: 3000; padding: 25px; transition: 0.4s; border-left: 1px solid #333; 
+        display: flex; flex-direction: column;}
+        .side-cart.active { right: 0; }
+        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
+        .cart-overlay.active { display: block; }
+
+        @media (max-width: 1024px) { 
+            .product-card { min-width: calc((100% - 20px) / 2.5); } 
+        }
+
+        @media (max-width: 600px) { 
+            .product-card { min-width: calc(100% - 40px); } 
+        }
+        /* --- SEARCH & CART --- */
+        .search-wrapper { position: fixed; top: 0; left: 0; width: 100%; background: #fff; padding: 25px 8%; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .search-wrapper.active { display: flex; align-items: center; }
+        .search-wrapper input { flex: 1; border: none; outline: none; font-size: 18px; color: #333; }
+         /* --- CSS FOOTER --- */
+.main-footer {
+    background: #111;
+    padding: 80px 8% 20px;
+    border-top: 1px solid #222;
+    margin-top: 50px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-info h2 {
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.footer-info p {
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 20px;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.social-links a:hover { color: #c0392b; }
+
+.footer-form h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.footer-form input, .footer-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    outline: none;
+    border-radius: 5px;
+}
+
+.footer-form input:focus, .footer-form textarea:focus {
+    border-color: #fff;
+}
+
+.send-btn {
+    background: #fff;
+    color: #000;
+    padding: 12px 30px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    background: #c0392b;
+    color: #fff;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    font-size: 12px;
+    color: #555;
+}
+
+/* Điều chỉnh cho mobile */
+@media (max-width: 768px) {
+    .main-footer { padding: 50px 5% 20px; }
+    .footer-container { gap: 30px; }
+}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNavbar">
+        <div class="logo-container"><a href="index.html"><img src="Prs_guitars_logo.png"></a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="products.html">Sản Phẩm</a></li>
+            <li><a href="about.html">Giới Thiệu</a></li>
+            <li><a href="#footer-section">Liên Hệ</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div onclick="toggleCart()" style="position: relative; cursor: pointer;">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="search-wrapper" id="searchBar">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
+        <i class="fas fa-times" onclick="toggleSearch()" style="color:#000; cursor:pointer; font-size: 20px;"></i>
+    </div>
+    <div class="side-cart" id="sideCart">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+        <h3 style="color: #fff; letter-spacing: 2px;">GIỎ HÀNG</h3>
+        <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer; color: #fff;"></i>
+    </div>
+    
+    <div id="cartContent" style="flex-grow: 1; overflow-y: auto; margin-bottom: 20px;">
+        <p style="color: #888; text-align: center;">Giỏ hàng trống.</p>
+    </div>
+
+    <div id="cartFooter" style="border-top: 1px solid #333; padding-top: 20px; display: none;">
+        <div style="display: flex; justify-content: space-between; color: #fff; font-weight: 700; margin-bottom: 15px;">
+            <span>TỔNG CỘNG:</span>
+            <span id="cartTotal">0 VNĐ</span>
+        </div>
+        <button class="send-btn" style="width: 100%; border-radius: 5px;" onclick="checkout()">XÁC NHẬN ĐẶT HÀNG</button>
+    </div>
+</div>
+
+    <header class="page-header">
+        <h1>BỘ SƯU TẬP GUITAR</h1>
+    </header>
+
+    <div class="slider-wrapper-parent">
+        <div id="SE-Series" class="section-header-container">
+            <h2>SE Series</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="PRS SE Custom 24">
+                    <div class="product-image-area"><img src="PRS SE Custom 24.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24</h3>
+                        <p class="product-price">22.850.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE Custom 24 Floyd">
+                    <div class="product-image-area"><img src="PRS SE Custom 24 Floyd.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24 Floyd</h3>
+                        <p class="product-price">24.850.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24 Floyd')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE Custom 24 Left-handed">
+                    <div class="product-image-area"><img src="PRS SE Custom 24 Left-handed.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24 Left-handed</h3>   
+                        <p class="product-price">23.450.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24 Left-handed')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE Custom 24 Electric Guitar Quilt Package">
+                    <div class="product-image-area"><img src="PRS SE Custom 24 Electric Guitar Quilt Package.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24 Electric Guitar Quilt Package</h3>
+                        <p class="product-price">25.800.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24 Electric Guitar Quilt Package')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE Custom 24 Semi-Hollow Piezo">
+                    <div class="product-image-area"><img src="PRS SE Custom 24 Semi-Hollow Piezo.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24 Semi-Hollow Piezo</h3>
+                        <p class="product-price">42.550.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24 Semi-Hollow Piezo')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE Custom 24-08">
+                    <div class="product-image-area"><img src="PRS SE Custom 24-08.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24-08</h3>
+                        <p class="product-price">24.400.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24-08')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE Custom 24-08 Quilt">
+                    <div class="product-image-area"><img src="PRS SE Custom 24-08 Quilt.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE Custom 24-08 Quilt</h3>
+                        <p class="product-price">26.750.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE Custom 24-08 Quilt')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-wrapper-parent">
+        <div id="S2-Series" class="section-header-container">
+            <h2>S2 Series</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="PRS S2 Standard 22">
+                    <div class="product-image-area"><img src="S2 Standard 22.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 Standard 22</h3>
+                        <p class="product-price">43.850.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 Standard 22')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS S2 Vela, Mavis Mint Metallic">
+                    <div class="product-image-area"><img src="PRS S2 Vela, Mavis Mint Metallic.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 Vela, Mavis Mint Metallic</h3>
+                        <p class="product-price">45.750.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 Vela, Mavis Mint Metallic')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS S2 24 Charcoal Satin">
+                    <div class="product-image-area"><img src="PRS S2 24 Charcoal Satin.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 24 Charcoal Satin</h3>   
+                        <p class="product-price">47.650.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 24 Charcoal Satin')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS S2 Vela Metallic Midnight">
+                    <div class="product-image-area"><img src="PRS S2 Vela Metallic Midnight.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 Vela Metallic Midnight</h3>
+                        <p class="product-price">45.750.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 Vela Metallic Midnight')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS S2 Vela Semi-Hollow Pearl White">
+                    <div class="product-image-area"><img src="PRS S2 Vela Semi-Hollow Pearl White.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 Vela Semi-Hollow Pearl White</h3>
+                        <p class="product-price">45.750.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 Vela Semi-Hollow Pearl White')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS S2 Mira 594, Antique White">
+                    <div class="product-image-area"><img src="PRS S2 Mira 594, Antique White.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 Mira 594, Antique White</h3>
+                        <p class="product-price">47.650.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 Mira 594, Antique White')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS S2 McCarty 594 Thinline, Frost Green Metallic">
+                    <div class="product-image-area"><img src="PRS S2 McCarty 594 Thinline, Frost Green Metallic.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS S2 McCarty 594 Thinline, Frost Green Metallic</h3>
+                        <p class="product-price">45.750.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS S2 McCarty 594 Thinline, Frost Green Metallic')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slider-wrapper-parent">
+        <div id="Bolt-On-Electric" class="section-header-container">
+            <h2>Bolt-On Electric</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="PRS CE24 Carroll Blue">
+                    <div class="product-image-area"><img src="PRS CE24 Carroll Blue.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS CE24 Carroll Blue</h3>
+                        <p class="product-price">18.100.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS CE24 Carroll Blue')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS CE24 Semi-Hollow Lake Blue">
+                    <div class="product-image-area"><img src="PRS CE24 Semi-Hollow Lake Blue.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS CE24 Semi-Hollow Lake Blue</h3>
+                        <p class="product-price">70.500.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS CE24 Semi-Hollow Lake Blue')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS CE24 Special Limited Edition, Black Amber">
+                    <div class="product-image-area"><img src="PRS CE24 Special Limited Edition, Black Amber.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS CE24 Special Limited Edition, Black Amber</h3>
+                        <p class="product-price">81.400.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS CE24 Special Limited Edition, Black Amber')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS CE22 Limited Edition, Vintage Sunburst">
+                    <div class="product-image-area"><img src="PRS CE22 Limited Edition, Vintage Sunburst.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS CE22 Limited Edition, Vintage Sunburst</h3>
+                        <p class="product-price">75.550.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS CE22 Limited Edition, Vintage Sunburst')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="slider-wrapper-parent">
+        <div id="SE-Acoustics" class="section-header-container">
+            <h2>SE Angelus Cutaway Acoustics</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="PRS SE A20E Satin Black">
+                    <div class="product-image-area"><img src="PRS SE A20E Satin Black.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE A20E Satin Black</h3>
+                        <p class="product-price">19.050.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE A20E Satin Black')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE A40E Natural">
+                    <div class="product-image-area"><img src="PRS SE A40E Natural.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE A40E Natural</h3>
+                        <p class="product-price">20.000.000</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE A40E Natural')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE A50E, Black Gold Burst">
+                    <div class="product-image-area"><img src="PRS SE A50E, Black Gold Burst.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE A50E, Black Gold Burst</h3>
+                        <p class="product-price">22.850.000</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE A50E, Black Gold Burst')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE A60E, Cobalt Blue Burst">
+                    <div class="product-image-area"><img src="PRS SE A60E, Cobalt Blue Burst.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE A60E, Cobalt Blue Burst</h3>
+                        <p class="product-price">28.650.000</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE A60E, Cobalt Blue Burst')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS SE A60E Left-Handed, Natural">
+                    <div class="product-image-area"><img src="PRS SE A60E Left-Handed Natural.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS SE A60E Left-Handed Natural</h3>
+                        <p class="product-price">28.650.000</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS SE A60E Left-Handed Natural')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onscroll = function() {
+            let nav = document.getElementById('mainNavbar');
+            if (window.pageYOffset > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        };
+
+        function toggleCart() {
+            document.getElementById('sideCart').classList.toggle('active');
+            document.getElementById('cartOverlay').classList.toggle('active');
+        }
+
+        let cart = {}; // Dùng object để lưu: { "Tên SP": { price: 20000, qty: 1, img: "..." } }
+
+function addToCart(name) {
+    // Lấy thông tin giá từ thẻ chứa nút vừa bấm
+    const productCard = event.target.closest('.product-card');
+    const priceText = productCard.querySelector('.product-price').innerText;
+    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+    const img = productCard.querySelector('img').src;
+
+    if (cart[name]) {
+        cart[name].qty += 1;
+    } else {
+        cart[name] = { price: price, qty: 1, img: img };
+    }
+    
+    updateCartUI();
+    if (!document.getElementById('sideCart').classList.contains('active')) toggleCart();
+}
+
+function updateQuantity(name, delta) {
+    cart[name].qty += delta;
+    if (cart[name].qty <= 0) {
+        delete cart[name];
+    }
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const cartContent = document.getElementById('cartContent');
+    const cartTotal = document.getElementById('cartTotal');
+    const cartFooter = document.getElementById('cartFooter');
+    const countIcon = document.getElementById('count');
+    
+    let html = '';
+    let total = 0;
+    let totalQty = 0;
+
+    Object.keys(cart).forEach(name => {
+        const item = cart[name];
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        totalQty += item.qty;
+
+        html += `
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; align-items: center;">
+                <img src="${item.img}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                <div style="flex: 1;">
+                    <h4 style="font-size: 13px; color: #fff; margin-bottom: 5px;">${name}</h4>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="display: flex; align-items: center; border: 1px solid #444; border-radius: 3px;">
+                            <button onclick="updateQuantity('${name}', -1)" style="background:none; border:none; color:#fff; padding: 2px 8px; cursor:pointer;">-</button>
+                            <span style="color:#fff; font-size:12px;">${item.qty}</span>
+                            <button onclick="updateQuantity('${name}', 1)" style="background:none; border:none; color:#fff; padding: 2px 8px; cursor:pointer;">+</button>
+                        </div>
+                        <span style="color: #c0392b; font-size: 13px; font-weight: 600;">${itemTotal.toLocaleString()}đ</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    countIcon.innerText = totalQty;
+    
+    if (totalQty === 0) {
+        cartContent.innerHTML = '<p style="color: #888; text-align: center; margin-top: 20px;">Giỏ hàng trống.</p>';
+        cartFooter.style.display = 'none';
+    } else {
+        cartContent.innerHTML = html;
+        cartTotal.innerText = total.toLocaleString() + ' VNĐ';
+        cartFooter.style.display = 'block';
+    }
+}
+
+function checkout() {
+    if (Object.keys(cart).length === 0) return;
+    alert("Cảm ơn bạn! Đơn hàng của bạn đã được tiếp nhận. Chúng tôi sẽ liên hệ sớm nhất.");
+    cart = {}; // Xóa giỏ hàng sau khi đặt
+    updateCartUI();
+    toggleCart();
+}
+
+        function moveSlide(direction, button) {
+            // Tìm wrapper cha chứa đúng cụm slider này
+            const section = button.closest('.slider-wrapper-parent'); 
+            const track = section.querySelector('.slider-track');
+            const cards = track.querySelectorAll('.product-card');
+
+            // Khởi tạo vị trí riêng cho từng track
+            if (track.dataset.index === undefined) track.dataset.index = 0;
+            let currentIndex = parseInt(track.dataset.index);
+
+            // Tính toán số lượng card hiển thị tùy theo màn hình
+            let visibleCards = 5;
+            if (window.innerWidth <= 1024) visibleCards = 2;
+            if (window.innerWidth <= 600) visibleCards = 1;
+
+            const maxIndex = Math.max(0, cards.length - visibleCards);
+
+            // Cập nhật vị trí trượt
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+            track.dataset.index = currentIndex;
+
+            // Thực hiện hiệu ứng trượt dựa trên kích thước card thực tế
+            const cardWidth = cards[0].offsetWidth + 20; 
+            track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+        function toggleSearch() { document.getElementById('searchBar').classList.toggle('active'); }
+        function filterProducts() {
+            let input = document.getElementById('searchInput').value.toUpperCase();
+            let cards = document.getElementsByClassName('product-card');
+            for (let card of cards) {
+                let name = card.getAttribute('data-name').toUpperCase();
+                card.style.display = name.includes(input) ? "" : "none";
+            }
+        }
+    </script>
+    <footer id="footer-section" class="main-footer">
+    <div class="footer-container">
+        <div class="footer-info">
+            <h2>PRS GUITARS VN</h2>
+            <p>Lan tỏa đam mê, kết nối nghệ sĩ.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-form">
+            <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
+            <form action="https://formspree.io/f/wangz.thanhhai@gmail.com" method="POST">
+                <input type="text" name="name" placeholder="Họ và tên" required>
+                <input type="email" name="email" placeholder="Email của bạn" required>
+                <textarea name="message" placeholder="Lời nhắn..." rows="4" required></textarea>
+                <button type="submit" class="send-btn">GỬI THÔNG TIN</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 PRS Guitars VN. Designed by Thanh Hải.</p>
+    </div>
+</footer>
+</body>
+</html>
