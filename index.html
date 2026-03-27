@@ -126,10 +126,30 @@
         }
 
         /* --- SEARCH & CART --- */
-        .search-wrapper { position: fixed; top: 0; left: 0; width: 100%; background: #fff; padding: 25px 8%; display: none; z-index: 2000; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .search-wrapper.active { display: flex; align-items: center; }
-        .search-wrapper input { flex: 1; border: none; outline: none; font-size: 18px; color: #333; }
-        
+        .search-wrapper { position: fixed; top: -100px; left: 0; width: 100%; background: #fff; padding: 25px 8%; display: flex; z-index: 2001; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        transition: all 0.4s ease; visibility: hidden; opacity: 0;}
+        .search-wrapper.active { top: 0; /* Trượt xuống khi active */
+        visibility: visible;
+        opacity: 1;
+        }
+        .search-wrapper input { flex: 1; 
+        border: none; 
+        outline: none; 
+        font-size: 18px; 
+        color: #333; 
+        background: transparent;
+        }
+        .search-wrapper i {
+        color: #000;
+        cursor: pointer;
+        font-size: 20px;
+        margin-left: 20px;
+        transition: 0.3s;
+        }
+
+        .search-wrapper i:hover {
+        color: #c0392b;
+        }
         .side-cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #1a1a1a; z-index: 3000; padding: 30px; transition: 0.4s ease; }
         .side-cart.active { right: 0; }
         .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
@@ -291,7 +311,20 @@
             }
         };
 
-        function toggleSearch() { document.getElementById('searchBar').classList.toggle('active'); }
+        function toggleSearch() { 
+        const searchBar = document.getElementById('searchBar');
+        const searchInput = document.getElementById('searchInput');
+    
+        searchBar.classList.toggle('active');
+    
+    // Nếu mở thanh tìm kiếm thì tự động focus vào ô nhập
+    if (searchBar.classList.contains('active')) {
+        setTimeout(() => searchInput.focus(), 300);
+    } else {
+        searchInput.value = ''; // Xóa nội dung khi đóng
+        filterProducts(); // Reset lại danh sách sản phẩm
+    }
+        }
         
         function toggleCart() {
             document.getElementById('sideCart').classList.toggle('active');
