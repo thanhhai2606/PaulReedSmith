@@ -771,13 +771,38 @@ function submitOrder(event) {
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
     }).then(() => {
-        alert("Đặt hàng thành công! Thông tin đã được gửi tới Thanh Hải.");
+        alert("Đặt hàng thành công! Thông tin đã được gửi tới Thành Hải.");
         cart = {}; updateCartUI(); closeCheckout();
     }).finally(() => {
         btn.innerText = "HOÀN TẤT ĐẶT HÀNG"; btn.disabled = false;
     });
 }
+function submitContact(event) {
+    event.preventDefault();
+    const btn = event.target.querySelector('button');
+    btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
 
+    const data = {
+        "Họ tên": document.getElementById('contactName').value,
+        "Email": document.getElementById('contactEmail').value,
+        "Lời nhắn": document.getElementById('contactMessage').value,
+        "Nguồn": "Form liên hệ chân trang"
+    };
+
+    // Sử dụng link Formspree của bạn
+    fetch("https://formspree.io/f/mbdpdrbb", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    }).then(() => {
+        alert("Cảm ơn bạn! Thông tin đã được gửi thành công.");
+        document.getElementById('contactForm').reset();
+    }).catch(() => {
+        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+    }).finally(() => {
+        btn.innerText = "GỬI THÔNG TIN"; btn.disabled = false;
+    });
+}
         function moveSlide(direction, button) {
             // Tìm wrapper cha chứa đúng cụm slider này
             const section = button.closest('.slider-wrapper-parent'); 
@@ -815,6 +840,7 @@ function submitOrder(event) {
                 card.style.display = name.includes(input) ? "" : "none";
             }
         }
+        
     </script>
     <footer id="footer-section" class="main-footer">
     <div class="footer-container">
@@ -829,14 +855,14 @@ function submitOrder(event) {
         </div>
 
         <div class="footer-form">
-            <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
-            <form action="https://formspree.io/f/wangz.thanhhai@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Họ và tên" required>
-                <input type="email" name="email" placeholder="Email của bạn" required>
-                <textarea name="message" placeholder="Lời nhắn..." rows="4" required></textarea>
-                <button type="submit" class="send-btn">GỬI THÔNG TIN</button>
-            </form>
-        </div>
+    <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
+    <form id="contactForm" onsubmit="submitContact(event)">
+        <input type="text" id="contactName" placeholder="Họ và tên" required>
+        <input type="email" id="contactEmail" placeholder="Email của bạn" required>
+        <textarea id="contactMessage" placeholder="Lời nhắn..." rows="4" required></textarea>
+        <button type="submit" class="send-btn">GỬI THÔNG TIN</button>
+    </form>
+</div>
     </div>
     <div class="footer-bottom">
         <p>&copy; 2026 PRS Guitars VN. Designed by Thanh Hải.</p>
