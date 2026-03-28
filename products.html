@@ -350,6 +350,191 @@
     outline: none;
 }
 .checkout-input:focus { border-color: #c0392b; }
+/* Style cho Product Modal */
+/* --- STYLE CHO PRODUCT MODAL (CẬP NHẬT MỚI) --- */
+.product-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 5000; /* Nằm trên cùng */
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #181818;
+    width: 90%;
+    max-width: 950px; /* Độ rộng tối đa của popup */
+    height: 600px; /* Chiều cao popup bằng 80% màn hình */
+    border-radius: 30px;
+    position: relative;
+    /* Bỏ padding để ảnh tràn viền */
+    padding: 0; 
+    border: 3px solid #c7c7c77c;
+    overflow: hidden; /* Cắt phần ảnh thừa */
+    box-shadow: 0 25px 50px -12px rgb(138, 138, 138);
+}
+
+/* Nút đóng modal */
+.close-modal {
+    position: absolute;
+    right: 20px; top: 10px;
+    color: #fff;
+    font-size: 35px;
+    cursor: pointer;
+    z-index: 10; /* Nằm trên ảnh */
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.modal-body {
+    display: flex;
+    height: 100%; /* Chiều cao bằng modal-content */
+    gap: 0; /* Bỏ gap để ảnh và info sát nhau */
+}
+
+/* --- PHẦN HÌNH ẢNH (BÊN TRÁI) --- */
+.modal-image { 
+    flex: 1.2; /* Chiếm nhiều diện tích hơn */
+    height: 100%;
+    overflow: hidden;
+}
+
+.modal-image img {
+    width: 100%;
+    height: 100%;
+    /* THUỘC TÍNH QUAN TRỌNG NHẤT */
+    object-fit: cover; /* Ảnh tràn toàn bộ khung */
+    object-position: bottom; /* Chỉ hiển thị phần DƯỚI của ảnh */
+}
+
+/* --- PHẦN THÔNG TIN (BÊN PHẢI) --- */
+/* --- THIẾT KẾ LẠI MODAL INFO ĐỂ TẠO CẢM GIÁC CAO CẤP --- */
+.modal-info { 
+    flex: 1.2; 
+    color: #fff; 
+    padding: 60px 50px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #111; /* Nền tối sâu hơn */
+    position: relative;
+}
+
+/* Tên thương hiệu nhỏ phía trên */
+.modal-info::before {
+    content: "PRS PREMUM COLLECTION";
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #555;
+    font-weight: 700;
+}
+
+/* Tên sản phẩm: Chữ to, đậm, khoảng cách chữ hẹp lại tạo sự hiện đại */
+#modalTitle { 
+    font-size: 42px; 
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+}
+
+/* Giá tiền: Sử dụng màu đỏ đặc trưng của PRS làm điểm nhấn */
+.modal-price { 
+    font-size: 26px; 
+    color: #c0392b; 
+    font-weight: 300;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+}
+
+/* Phần mô tả: Tăng khoảng cách dòng, màu chữ xám nhẹ để dễ đọc */
+.modal-description {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 40px;
+}
+
+/* Đường kẻ dọc trang trí bên cạnh mô tả */
+.modal-description::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background: #333;
+}
+
+.modal-description h4 { 
+    font-size: 11px; 
+    color: #c0392b; 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.modal-description p { 
+    font-size: 15px; 
+    line-height: 1.8; 
+    color: #999; 
+    max-width: 90%;
+}
+
+/* Nút bấm: Thiết kế tối giản nhưng mạnh mẽ */
+#modalAddToCart {
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    color: #000;
+    border: none;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+#modalAddToCart:hover {
+    background: #c0392b;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(192, 57, 43, 0.4);
+}
+
+
+/* Nút đóng: Tinh tế hơn */
+.close-modal {
+    color: #444;
+    transition: 0.3s;
+}
+
+.close-modal:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 768px) {
+    .modal-content { height: 90vh; width: 95%; }
+    .modal-body { flex-direction: column; }
+    .modal-image { flex: 1; max-height: 50%; } /* Ảnh chiếm nửa trên */
+    .modal-info { flex: 1; padding: 20px; justify-content: flex-start; }
+    #modalTitle { font-size: 24px; }
+    .modal-price { font-size: 20px; margin-bottom: 15px; }
+}
     </style>
 </head>
 <body>
@@ -411,7 +596,7 @@
         <div class="slider-wrapper">
             <div class="slider-track">
                 <div class="product-card" data-name="PRS SE Custom 24">
-                    <div class="product-image-area"><img src="PRS SE Custom 24.webp"></div>
+                    <div class="product-image-area"><img src="PRS SE Custom 24.webp" onclick="openProductModal('PRS SE Custom 24')"></div>
                     <div class="product-info-wrapper">
                         <h3>PRS SE Custom 24</h3>
                         <p class="product-price">22.850.000 VNĐ</p>
@@ -644,28 +829,53 @@
             else nav.classList.remove('scrolled');
         };
 
+
         function toggleCart() {
-            document.getElementById('sideCart').classList.toggle('active');
-            document.getElementById('cartOverlay').classList.toggle('active');
+        document.getElementById('sideCart').classList.toggle('active');
+        document.getElementById('cartOverlay').classList.toggle('active');
         }
+        // Tự động gán sự kiện mở modal khi click vào ẢNH sản phẩm
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.product-image-area img').forEach(img => {
+        img.style.cursor = 'pointer'; // Hiện bàn tay khi di chuột vào ảnh
+        img.onclick = function(e) {
+            e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+            const name = this.closest('.product-card').getAttribute('data-name');
+            openProductModal(name);
+        };
+    });
+});
 
         let cart = {}; // Dùng object để lưu: { "Tên SP": { price: 20000, qty: 1, img: "..." } }
 
 function addToCart(name) {
-    // Lấy thông tin giá từ thẻ chứa nút vừa bấm
-    const productCard = event.target.closest('.product-card');
-    const priceText = productCard.querySelector('.product-price').innerText;
-    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
-    const img = productCard.querySelector('img').src;
+    let price, img;
 
+    // 1. Kiểm tra xem đang được gọi từ Modal hay từ Card ngoài trang chủ
+    const card = document.querySelector(`.product-card[data-name="${name}"]`);
+    
+    if (card) {
+        // Lấy thông tin gốc từ card sản phẩm
+        const priceText = card.querySelector('.product-price').innerText;
+        price = parseInt(priceText.replace(/[^0-9]/g, ''));
+        img = card.querySelector('img').src;
+    } else {
+        console.error("Không tìm thấy dữ liệu sản phẩm:", name);
+        return;
+    }
+
+    // 2. Cập nhật vào đối tượng giỏ hàng (cart)
     if (cart[name]) {
         cart[name].qty += 1;
     } else {
         cart[name] = { price: price, qty: 1, img: img };
     }
     
+    // 3. Cập nhật giao diện và tự động mở giỏ hàng
     updateCartUI();
-    if (!document.getElementById('sideCart').classList.contains('active')) toggleCart();
+    if (!document.getElementById('sideCart').classList.contains('active')) {
+        toggleCart();
+    }
 }
 
 function updateQuantity(name, delta) {
@@ -840,7 +1050,50 @@ function submitContact(event) {
                 card.style.display = name.includes(input) ? "" : "none";
             }
         }
-        
+        // 1. Hàm mở Modal và gán dữ liệu
+function openProductModal(name) {
+    // Tìm card sản phẩm dựa trên data-name
+    const card = document.querySelector(`.product-card[data-name="${name}"]`);
+    
+    if (!card) {
+        console.error("Không tìm thấy sản phẩm:", name);
+        return;
+    }
+
+    // Lấy thông tin từ card ở ngoài trang web
+    const priceText = card.querySelector('.product-price').innerText;
+    const imgUrl = card.querySelector('img').src;
+
+    // Đổ dữ liệu vào Modal
+    document.getElementById('modalTitle').innerText = name;
+    document.getElementById('modalPrice').innerText = priceText;
+    document.getElementById('modalImg').src = imgUrl;
+    
+    // QUAN TRỌNG: Gán sự kiện click cho nút "Thêm vào giỏ" bên trong Modal
+    const modalAddBtn = document.getElementById('modalAddToCart');
+    modalAddBtn.onclick = function() {
+        addToCart(name); // Gọi hàm thêm vào giỏ hàng
+        closeProductModal(); // Đóng popup sau khi thêm
+    };
+
+    // Hiển thị Modal bằng Flexbox để căn giữa
+    document.getElementById('productModal').style.display = "flex";
+}
+
+// 2. Hàm đóng Modal
+function closeProductModal() {
+    document.getElementById('productModal').style.display = "none";
+}
+
+
+// 4. Đóng modal khi click ra vùng đen bên ngoài nội dung popup
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('productModal');
+    if (event.target == modal) {
+        closeProductModal();
+    }
+});
+
     </script>
     <footer id="footer-section" class="main-footer">
     <div class="footer-container">
@@ -887,5 +1140,24 @@ function submitContact(event) {
     </form>
 </div>
 </footer>
+<div id="productModal" class="product-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeProductModal()">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImg" src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h2 id="modalTitle"></h2>
+                <p class="modal-price" id="modalPrice"></p>
+                <div class="modal-description">
+                    <h4>Mô tả sản phẩm:</h4>
+                    <p>Dòng đàn cao cấp với thiết kế đặc trưng của PRS, mang lại âm thanh đa dạng và cảm giác chơi mượt mà cho nghệ sĩ.</p>
+                </div>
+                <button id="modalAddToCart" class="send-btn" style="width: 100%; margin-top: 20px;">THÊM VÀO GIỎ HÀNG</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
