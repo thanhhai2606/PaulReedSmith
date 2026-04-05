@@ -20,6 +20,9 @@
         #SE-Series, #S2-Series, #Bolt-On-Electric, #SE-Acoustics {
             scroll-margin-top: 100px; 
         }
+        #Cable-Guitar, #Strings-Guitar, #Picks-Guitar {
+            scroll-margin-top: 100px; 
+        }
         /* NAVBAR */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
@@ -49,6 +52,41 @@
     /* --- BẮT ĐẦU PHẦN SỬA ĐỔI --- */
     /* 1. Đường dẫn tới hình ảnh của bạn */
     background-image: url('wp10222658-prs-guitars-wallpapers.jpg'); 
+    
+    /* 2. Đảm bảo ảnh bao phủ toàn bộ khu vực mà không bị méo */
+    background-size: cover; 
+    
+    /* 3. Căn giữa hình ảnh */
+    background-position: center; 
+    
+    /* 4. Ngăn hình ảnh lặp lại nếu nó nhỏ hơn khung chứa */
+    background-repeat: no-repeat; 
+    
+    /* 5. Thiết lập màu nền dự phòng trong lúc ảnh đang tải */
+    background-color: #bcbcbc; 
+    
+    /* 6. (Tùy chọn) Thêm một lớp phủ tối để chữ nổi bật hơn */
+    position: relative; /* Cần thiết cho lớp phủ */
+}
+
+/* (Tùy chọn) Tạo lớp phủ tối (Overlay) */
+.page-header_1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0); /* Màu đen với độ mờ 50% */
+    z-index: 1; /* Nằm dưới chữ nhưng trên ảnh nền */
+}
+.page-header_1 { 
+    padding: 250px 8% 30px; 
+    text-align: center; 
+    
+    /* --- BẮT ĐẦU PHẦN SỬA ĐỔI --- */
+    /* 1. Đường dẫn tới hình ảnh của bạn */
+    background-image: url('new-straps-2023-home-slider_1512x.webp'); 
     
     /* 2. Đảm bảo ảnh bao phủ toàn bộ khu vực mà không bị méo */
     background-size: cover; 
@@ -608,9 +646,9 @@
                 <a href="products.html" class="nav-link">SẢN PHẨM <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
                     <ul class="dropdown-menu">
                 <li><a href="products.html#guitar">Guitar</a></li>
-                <li><a href="products.html#cable">Cable</a></li>
-                <li><a href="products.html#strings">Strings</a></li>
-                <li><a href="products.html#picks">Picks</a></li>
+                <li><a href="products.html#Cable-Guitar">Cable</a></li>
+                <li><a href="products.html#Strings-Guitar">Strings</a></li>
+                <li><a href="products.html#Picks-Guitar">Picks</a></li>
     </ul>
 </li>
             <li><a href="about.html">Giới Thiệu</a></li>
@@ -891,9 +929,218 @@
             </div>
         </div>
     </div>
-    <header class="page-header">
-        <h1>BỘ SƯU TẬP GUITAR</h1>
+    <header class="page-header_1">
+        <h1>PHỤ KIỆN GUITAR</h1>
     </header>
+    <div class="slider-wrapper-parent">
+        <div id="Cable-Guitar" class="section-header-container">
+            <h2>Cable Guitar</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="5ft Classic Instrument Cable - Straight">
+                    <div class="product-image-area"><img src="5ft_Classic_Instrument_Cable-Straight.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>5ft Classic Instrument Cable - Straight</h3>
+                        <p class="product-price">250.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('5ft Classic Instrument Cable - Straight')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="10ft Classic Instrument Cable - Angle/Straight">
+                    <div class="product-image-area"><img src="10ft_Classic_Instrument_Cable,Angle-Straight.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>10ft Classic Instrument Cable - Angle/Straight</h3>
+                        <p class="product-price">450.000 VNĐ </p>
+                        <button class="shop-now-btn" onclick="addToCart('10ft Classic Instrument Cable - Angle/Straight')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="10ft Classic Instrument Cable - Straight">
+                    <div class="product-image-area"><img src="10ft_Classic_Instrument_Cable-Straight.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>10ft Classic Instrument Cable - Straight</h3>
+                        <p class="product-price">430.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('10ft Classic Instrument Cable - Straight')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="18ft Classic Instrument Cable - Angle/Straight">
+                    <div class="product-image-area"><img src="18ft_Classic_Instrument_Cable,Angle-Straight.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>18ft Classic Instrument Cable - Angle/Straight</h3>
+                        <p class="product-price">850.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('18ft Classic Instrument Cable - Angle/Straight')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="10ft Classic Instrument Cable Angle">
+                    <div class="product-image-area"><img src="10ft_Classic_Instrument_Cable,Angle.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>10ft Classic Instrument Cable Angle</h3>
+                        <p class="product-price">450.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('10ft Classic Instrument Cable Angle')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-wrapper-parent">
+        <div id="Picks-Guitar" class="section-header-container">
+            <h2>Picks Guitar</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="Hộp đựng Picks (Gold Birds)">
+                    <div class="product-image-area"><img src="Hop_dung_Picks(Gold Birds).webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Hộp đựng Picks (Gold Birds)</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Hộp đựng Picks (Gold Birds)')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Delrin Punch Picks Green 0.88mm">
+                    <div class="product-image-area"><img src="Delrin_Punch_Picks_Green_0.88mm.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Delrin 'Punch' Picks Green 0.88mm</h3>
+                        <p class="product-price">40.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Delrin Punch Picks Green 0.88mm')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Delrin Punch Picks Orange 0.60mm">
+                    <div class="product-image-area"><img src="Delrin_Punch_Picks_Orange_0.60mm.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Delrin Punch Picks Orange 0.60mm</h3>
+                        <p class="product-price">40.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Delrin Punch Picks Orange 0.60mm')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Delrin Punch Picks Yellow 0.73mm">
+                    <div class="product-image-area"><img src="Delrin_Punch_Picks_Yellow_0.73mm.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Delrin Punch Picks Yellow 0.73mm</h3>
+                        <p class="product-price">40.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Delrin Punch Picks Yellow 0.73mm')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Delrin Punch Picks Red 0.50mm">
+                    <div class="product-image-area"><img src="Delrin_Punch_Picks_Red_0.50mm.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Delrin Punch Picks Red 0.50mm </h3>
+                        <p class="product-price">40.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Delrin Punch Picks Red 0.50mm')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Delrin Punch Picks Blue 1.00mm">
+                    <div class="product-image-area"><img src="Delrin_Punch_Picks_Blue_1.00mm.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Delrin Punch Picks Blue 1.00mm</h3>
+                        <p class="product-price">40.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Delrin Punch Picks Blue 1.00mm')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Delrin Punch Picks Purple 1.14mm">
+                    <div class="product-image-area"><img src="Delrin_Punch_Picks_Purple_1.14mm.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Delrin Punch Picks Purple 1.14mm</h3>
+                        <p class="product-price">40.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Delrin Punch Picks Purple 1.14mm')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="White Celluloid Pearloid Picks 12-Pack">
+                    <div class="product-image-area"><img src="White_Celluloid_Pearloid_Picks_12-Pack.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>White Celluloid Pearloid Picks 12-Pack</h3>
+                        <p class="product-price">140.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('White Celluloid Pearloid Picks 12-Pack')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="Red Tortoise Celluloid Pick 12-Pack">
+                    <div class="product-image-area"><img src="Red Tortoise Celluloid Pick 12-Pack.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>Red Tortoise Celluloid Pick 12-Pack</h3>
+                        <p class="product-price">140.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('Red Tortoise Celluloid Pick 12-Pack')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-wrapper-parent">
+        <div id="Strings-Guitar" class="section-header-container">
+            <h2>Strings Guitar</h2>
+            <div class="slider-controls">
+                <button class="slide-btn" onclick="moveSlide(-1, this)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slide-btn" onclick="moveSlide(1, this)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <div class="product-card" data-name="PRS Signature Regular Light Guitar Strings 10-46">
+                    <div class="product-image-area"><img src="PRS Signature Regular Light Guitar Strings 10-46.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature Regular Light Guitar Strings 10-46</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature Regular Light Guitar Strings 10-46')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS Signature Custom Light Guitar Strings 9.5-44">
+                    <div class="product-image-area"><img src="PRS Signature Custom Light Guitar Strings 9.5-44.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature Custom Light Guitar Strings 9.5-44</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature Custom Light Guitar Strings 9.5-44')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS Signature Ultra Light Guitar Strings 9-42">
+                    <div class="product-image-area"><img src="PRS Signature Ultra Light Guitar Strings 9-42.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature Ultra Light Guitar Strings 9-42</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature Ultra Light Guitar Strings 9-42')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS Signature Light Top-Hvy Bot Guitar Strings 10-52">
+                    <div class="product-image-area"><img src="PRS Signature Light Top-Hvy Bot Guitar Strings 10-52.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature Light Top-Hvy Bot Guitar Strings 10-52</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature Light Top-Hvy Bot Guitar Strings 10-52')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS Signature Medium Guitar Strings 11-49">
+                    <div class="product-image-area"><img src="PRS Signature Medium Guitar Strings 11-49.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature Medium Guitar Strings 11-49</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature Medium Guitar Strings 11-49')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS Signature David Grissom Guitar Strings 11-49">
+                    <div class="product-image-area"><img src="PRS Signature David Grissom Guitar Strings 11-49.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature David Grissom Guitar Strings 11-49</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature David Grissom Guitar Strings 11-49')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-card" data-name="PRS Signature Heavy Guitar Strings 12-52">
+                    <div class="product-image-area"><img src="PRS Signature Heavy Guitar Strings 12-52.webp"></div>
+                    <div class="product-info-wrapper">
+                        <h3>PRS Signature Heavy Guitar Strings 12-52</h3>
+                        <p class="product-price">290.000 VNĐ</p>
+                        <button class="shop-now-btn" onclick="addToCart('PRS Signature Heavy Guitar Strings 12-52')">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         window.onscroll = function() {
             let nav = document.getElementById('mainNavbar');
