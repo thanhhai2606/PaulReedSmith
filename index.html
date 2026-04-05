@@ -13,45 +13,107 @@
         html {
             scroll-behavior: smooth;
         }
-        /* --- NAVBAR: ĐÃ SỬA LỖI --- */
-        .navbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 8%; background: transparent; position: fixed;
-            width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
-        }
+        /* Căn chỉnh Layout mới */
+/* --- Cập nhật Header --- */
+.navbar {
+    display: flex; /* Chuyển từ grid sang flex để dễ kiểm soát hơn */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 8%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2000;
+    transition: 0.4s;
+    background: transparent;
+}
 
-        /* Khi cuộn chuột: Nền trắng, chữ đen, logo thu nhỏ */
-        .navbar.scrolled { 
-            padding: 12px 8%; 
-            background: rgba(255, 255, 255, 0.98); 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); 
-        }
+/* Khi cuộn trang */
+.navbar.scrolled {
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
 
-        /* Đảm bảo logo thu nhỏ lại khi cuộn */
-        .logo-container img { height: 45px; transition: 0.4s; }
-        .navbar.scrolled .logo-container img { height: 35px; filter: invert(0); } /* Đổi filter nếu logo bạn là màu trắng */
+/* Các nhóm trái - giữa - phải */
+.nav-left, .logo-container, .nav-icons {
+    flex: 1; /* Chia đều không gian để Logo luôn ở chính giữa */
+}
 
-        /* Đổi màu menu và icon sang đen khi nền trắng */
-        .navbar.scrolled .nav-links li a, 
-        .navbar.scrolled .nav-icons i { 
-            color: #000 !important; 
-        }
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
 
-        .nav-links { list-style: none; display: flex; }
-        .nav-links li a { 
-            text-decoration: none; color: #fff; margin: 0 15px; 
-            font-size: 14px; font-weight: 600; text-transform: uppercase; 
-            transition: 0.3s;
-        }
-        
-        .nav-icons { display: flex; gap: 20px; align-items: center; }
-        .nav-icons i { color: #fff; font-size: 18px; cursor: pointer; transition: 0.3s; }
-        
-        .cart-count { 
-            background: #c0392b; color: #fff; font-size: 10px; 
-            padding: 2px 6px; border-radius: 50%; vertical-align: top; margin-left: -10px; 
-        }
+.logo-container {
+    text-align: center;
+}
 
+.logo-container img {
+    height: 40px; /* Điều chỉnh kích thước logo */
+    transition: 0.3s;
+}
+
+.navbar.scrolled .logo-container img {
+    filter: none; /* Trả về màu gốc khi nền trắng (nếu cần) */
+}
+
+.nav-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; /* Căn giữa tất cả theo chiều dọc */
+    gap: 20px;
+}
+
+.nav-icons i, 
+.nav-icons div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 1; /* Loại bỏ khoảng cách dòng thừa */
+}
+
+/* Fix riêng cho icon giỏ hàng có số lượng */
+.nav-icons div i {
+    margin-top: 0; 
+}
+
+.cart-count {
+    background: #c0392b;
+    color: #fff;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -8px;
+    right: -10px;
+}
+
+/* Nút chuyển ngôn ngữ */
+.lang-switch {
+    font-size: 14px;
+    font-weight: 600;
+    color: #888;
+}
+
+.lang-switch span { cursor: pointer; transition: 0.3s; }
+.lang-switch span.active { color: #fff; text-decoration: underline; }
+.navbar i, .lang-switch span {
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-icons i:hover, .menu-icon:hover {
+    color: #c0392b !important;
+    transform: scale(1.1);
+}
+
+/* Màu icon khi cuộn */
+.navbar.scrolled i { color: #000 !important; }
         /* --- HERO --- */
         /* --- CẬP NHẬT HERO VỚI HÌNH ẢNH --- */
 .hero { 
@@ -152,8 +214,56 @@
         }
         .side-cart { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #1a1a1a; z-index: 3000; padding: 30px; transition: 0.4s ease; }
         .side-cart.active { right: 0; }
-        .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
-        .cart-overlay.active { display: block; }
+        /* --- FIX LỖI OVERLAY ĐEN MÀN HÌNH --- */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2500; /* Thấp hơn Sidebar */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Quan trọng: Chỉ hiện khi có class active */
+.cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sidebar Menu */
+.nav-links {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 300px;
+    height: 100vh;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+    transition: 0.4s ease;
+    z-index: 3001; /* Đảm bảo cao hơn Overlay cao nhất */
+    list-style: none;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+}
+
+/* Sidebar Giỏ hàng */
+.side-cart {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100vh;
+    background: #1a1a1a;
+    z-index: 3001; /* Cùng cấp với Menu */
+    padding: 30px;
+    transition: 0.4s ease;
+}
         /* --- CSS FOOTER --- */
 .main-footer {
     background: #111;
@@ -238,28 +348,144 @@
     .main-footer { padding: 50px 5% 20px; }
     .footer-container { gap: 30px; }
 }
+
+/* --- Biến nav-links thành Sidebar bên trái --- */
+.nav-links {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 300px;
+    height: 100vh;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+    transition: 0.4s ease;
+    z-index: 3000; /* Cao nhất để không bị đen đè lên chữ */
+    list-style: none;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5); /* Thêm bóng đổ cho xịn */
+}
+
+/* Khi menu được kích hoạt */
+.nav-links.active {
+    left: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+/* Header bên trong menu để có nút đóng */
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 15px;
+}
+
+.menu-header h3 { letter-spacing: 2px; }
+
+/* Đảm bảo icon menu luôn hiển thị đúng màu */
+.menu-icon {
+    font-size: 20px;
+    color: #fff;
+}
+.navbar.scrolled .menu-icon { color: #000; }
+
+/* --- CSS CHO SUBMENU XỔ XUỐNG --- */
+.submenu {
+    list-style: none;
+    background: #222;
+    margin-top: 0px;
+    border-radius: 8px;
+    max-height: 0; /* Mặc định ẩn */
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+
+/* Khi mở ra thông qua class open */
+.submenu.open {
+    max-height: 250px; 
+    padding: 10px 15px;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+.submenu li a {
+    font-size: 15px !important;
+    color: #bbb !important;
+    text-transform: capitalize !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+.submenu li:last-child a {
+    border-bottom: none !important;
+}
+
+/* Xoay mũi tên 180 độ khi mở */
+.arrow-icon.rotate {
+    transform: rotate(180deg);
+}
+
     </style>
 </head>
 <body>
 
-    <nav class="navbar" id="mainNavbar">
-        <div class="logo-container"><img src="Prs_guitars_logo.png"></div>
-        <ul class="nav-links">
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="products.html">Sản phẩm</a></li>
-            <li><a href="about.html">Giới Thiệu</a></li>
-            <li><a href="#footer-section">Liên Hệ</a></li>
-        </ul>
-        <div class="nav-icons">
-            <i class="fas fa-search" onclick="toggleSearch()"></i>
-            <div onclick="toggleCart()" style="cursor:pointer; position: relative;">
-                <i class="fas fa-shopping-bag"></i>
-                <span class="cart-count" id="count">0</span>
-            </div>
+<nav class="navbar" id="mainNavbar">
+    <div class="nav-left">
+        <i class="fas fa-bars menu-icon" onclick="toggleMobileMenu()" style="cursor:pointer;"></i>
+        <div class="lang-switch">
+            <span id="lang-vi" class="active" onclick="changeLang('vi')">VN</span> | 
+            <span id="lang-en" onclick="changeLang('en')">EN</span>
         </div>
-    </nav>
+    </div>
 
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="logo-container">
+        <a href="#"><img src="Prs_guitars_logo.png" alt="Logo"></a>
+    </div>
+
+    <div class="nav-icons">
+        <i class="fas fa-search" onclick="toggleSearch()"></i>
+        <div onclick="toggleCart()" style="cursor:pointer; position: relative;">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="cart-count" id="count">0</span>
+        </div>
+    </div>
+
+</nav>
+<ul class="nav-links" id="navLinks">
+        <div class="menu-header">
+            <h3>MENU</h3>
+            <i class="fas fa-times" onclick="toggleMobileMenu()"></i>
+        </div>
+        <li><a href="#" data-key="home" onclick="toggleMobileMenu()">Trang chủ</a></li>
+        <li class="has-submenu">
+    <div class="menu-item-content" onclick="toggleSubmenu(event)" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+        <a href="javascript:void(0)" data-key="products" style="border-bottom: none !important; pointer-events: none;">Sản phẩm</a>
+        <i class="fas fa-chevron-down arrow-icon" id="submenuArrow" style="transition: transform 0.3s ease;"></i>
+    </div>
+    <ul class="submenu" id="productSubmenu">
+        <li><a href="products.html#guitar" onclick="toggleMobileMenu()">Guitar</a></li>
+        <li><a href="products.html#cable" onclick="toggleMobileMenu()">Cable</a></li>
+        <li><a href="products.html#strings" onclick="toggleMobileMenu()">Strings</a></li>
+        <li><a href="products.html#picks" onclick="toggleMobileMenu()">Picks</a></li>
+    </ul>
+</li>
+        <li><a href="about.html" data-key="about" onclick="toggleMobileMenu()">Giới Thiệu</a></li>
+        <li><a href="#footer-section" data-key="contact" onclick="toggleMobileMenu()">Liên Hệ</a></li>
+    </ul>
     <div class="search-wrapper" id="searchBar">
         <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." onkeyup="filterProducts()">
         <i class="fas fa-times" onclick="toggleSearch()" style="color:#000; cursor:pointer; font-size: 20px;"></i>
@@ -327,9 +553,33 @@
         }
         
         function toggleCart() {
-            document.getElementById('sideCart').classList.toggle('active');
-            document.getElementById('cartOverlay').classList.toggle('active');
-        }
+    document.getElementById('sideCart').classList.toggle('active');
+    document.getElementById('cartOverlay').classList.toggle('active');
+    
+    // Đảm bảo menu trái luôn đóng khi mở giỏ hàng
+    document.getElementById('navLinks').classList.remove('active');
+    document.getElementById('menuOverlay').classList.remove('active');
+}
+
+function toggleMobileMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+    document.getElementById('menuOverlay').classList.toggle('active');
+    
+    // Đảm bảo giỏ hàng luôn đóng khi mở menu trái
+    document.getElementById('sideCart').classList.remove('active');
+    document.getElementById('cartOverlay').classList.remove('active');
+}
+function toggleSubmenu(event) {
+    // Ngăn chặn sự kiện lan ra ngoài làm đóng menu chính
+    event.stopPropagation();
+    
+    const submenu = document.getElementById('productSubmenu');
+    const arrow = document.getElementById('submenuArrow');
+    
+    // Bật/tắt class open và rotate
+    submenu.classList.toggle('open');
+    arrow.classList.toggle('rotate');
+}
 
         function filterProducts() {
             let input = document.getElementById('searchInput').value.toUpperCase();
@@ -375,6 +625,45 @@
         btn.innerText = "GỬI THÔNG TIN"; btn.disabled = false;
     });
 }
+const langData = {
+    vi: {
+        home: "Trang chủ",
+        products: "Sản phẩm",
+        about: "Giới thiệu",
+        contact: "Liên hệ",
+        cartTitle: "GIỎ HÀNG",
+        cartEmpty: "Trống."
+    },
+    en: {
+        home: "Home",
+        products: "Products",
+        about: "About Us",
+        contact: "Contact",
+        cartTitle: "SHOPPING CART",
+        cartEmpty: "Empty."
+    }
+};
+
+function changeLang(lang) {
+    // 1. Cập nhật class active cho nút chọn
+    document.getElementById('lang-vi').classList.toggle('active', lang === 'vi');
+    document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+
+    // 2. Đổi nội dung Menu chính
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        const key = link.getAttribute('data-key');
+        if (langData[lang][key]) {
+            link.innerText = langData[lang][key];
+        }
+    });
+
+    // 3. Đổi tiêu đề Giỏ hàng và Search
+    document.querySelector('.side-cart h3').innerText = langData[lang].cartTitle;
+    document.getElementById('searchInput').placeholder = (lang === 'vi') ? "Tìm kiếm sản phẩm..." : "Search products...";
+    document.getElementById('cartContent').innerText = (lang === 'vi') ? "Trống." : "Empty.";
+}
+
     </script>
     <footer class="main-footer" id="footer-section">
     <div class="footer-container">
@@ -405,5 +694,7 @@
         <p>&copy; 2026 PRS Guitars VN. Designed by Thanh Hải.</p>
     </div>
 </footer>
+<div class="cart-overlay" id="menuOverlay" onclick="toggleMobileMenu()"></div>
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 </body>
 </html>

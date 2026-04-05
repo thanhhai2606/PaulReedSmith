@@ -535,6 +535,67 @@
     #modalTitle { font-size: 24px; }
     .modal-price { font-size: 20px; margin-bottom: 15px; }
 }
+/* Container chứa mục Sản Phẩm */
+.has-dropdown {
+    position: relative; /* Để menu con căn lề theo mục này */
+}
+
+/* Menu con ban đầu sẽ ẩn */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Hiện ngay bên dưới chữ Sản phẩm */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px); /* Đưa ra giữa và hơi lệch xuống để tạo hiệu ứng trượt */
+    background-color: #1a1a1a;
+    min-width: 160px;
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+    border-top: 2px solid #c0392b; /* Đường line đỏ cho đúng style PRS */
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 3000;
+}
+
+/* Khi di chuột vào "Sản phẩm", hiện menu con lên */
+.has-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Kiểu dáng các link trong menu con */
+.dropdown-menu li a {
+    color: #fff !important;
+    padding: 12px 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+/* Hiệu ứng khi di chuột vào từng món (Guitar, Cable...) */
+.dropdown-menu li a:hover {
+    background-color: #333;
+    color: #c0392b !important;
+    padding-left: 25px;
+}
+
+/* Điều chỉnh màu sắc khi Navbar chuyển sang màu trắng (scrolled) */
+.navbar.scrolled .dropdown-menu {
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.navbar.scrolled .dropdown-menu li a {
+    color: #333 !important;
+}
+.navbar.scrolled .dropdown-menu li a:hover {
+    background-color: #f5f5f5;
+}
     </style>
 </head>
 <body>
@@ -543,7 +604,15 @@
         <div class="logo-container"><a href="index.html"><img src="Prs_guitars_logo.png"></a></div>
         <ul class="nav-links">
             <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="products.html">Sản Phẩm</a></li>
+            <li class="nav-item has-dropdown">
+                <a href="products.html" class="nav-link">SẢN PHẨM <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
+                    <ul class="dropdown-menu">
+                <li><a href="products.html#guitar">Guitar</a></li>
+                <li><a href="products.html#cable">Cable</a></li>
+                <li><a href="products.html#strings">Strings</a></li>
+                <li><a href="products.html#picks">Picks</a></li>
+    </ul>
+</li>
             <li><a href="about.html">Giới Thiệu</a></li>
             <li><a href="#footer-section">Liên Hệ</a></li>
         </ul>
@@ -822,6 +891,9 @@
             </div>
         </div>
     </div>
+    <header class="page-header">
+        <h1>BỘ SƯU TẬP GUITAR</h1>
+    </header>
     <script>
         window.onscroll = function() {
             let nav = document.getElementById('mainNavbar');

@@ -12,22 +12,95 @@
         body { background-color: #0f0f0f; color: #ffffff; overflow-x: hidden; line-height: 1.6; }
         html { scroll-behavior: smooth; }
 
-        /* --- NAVBAR (Giữ nguyên từ index) --- */
+/* --- Cập nhật Header --- */
+/* --- NAVBAR --- */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 8%; background: transparent; position: fixed;
-            width: 100%; top: 0; z-index: 1000; transition: all 0.4s ease;
+            padding: 15px 8%; position: fixed; width: 100%; top: 0; z-index: 2000;
+            transition: 0.4s; background: transparent;
         }
-        .navbar.scrolled { 
-            padding: 12px 8%; 
-            background: rgba(255, 255, 255, 0.98); 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        .navbar.scrolled { background: #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.1); padding: 10px 8%; }
+        .nav-left, .logo-container, .nav-icons { flex: 1; }
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .logo-container { text-align: center; }
+        .logo-container img { height: 45px; }
+        .nav-icons { display: flex; justify-content: flex-end; align-items: center; gap: 20px; }
+
+        .menu-icon, .nav-icons i, .lang-switch { font-size: 20px; cursor: pointer; color: #fff; transition: 0.3s; }
+        .navbar.scrolled .menu-icon, .navbar.scrolled .nav-icons i, .navbar.scrolled .lang-switch { color: #000 !important; }
+
+        .cart-count {
+            background: #c0392b; color: #fff; font-size: 10px;
+            width: 16px; height: 16px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: -8px; right: -10px;
         }
-        .logo-container img { height: 45px; transition: 0.3s; }
-        .navbar.scrolled .nav-links li a, .navbar.scrolled .nav-icons i { color: #000 !important; }
-        .nav-links { list-style: none; display: flex; }
-        .nav-links li a { text-decoration: none; color: #fff; margin: 0 20px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-icons { color: #fff; display: flex; gap: 20px; }
+
+        /* Sidebar Menu & Cart */
+        .nav-links, .side-cart {
+            position: fixed; top: 0; height: 100vh; background: #1a1a1a; 
+            transition: 0.4s ease; z-index: 3001; padding: 30px;
+        }
+        .nav-links { left: -350px; width: 300px; list-style: none; display: flex; flex-direction: column; gap: 15px; }
+        .nav-links.active { left: 0; }
+        .side-cart { right: -400px; width: 350px; }
+        .side-cart.active { right: 0; }
+
+        .nav-links li a {
+            text-decoration: none; color: #fff; font-size: 18px; font-weight: 600;
+            text-transform: uppercase; display: block; padding: 10px 0; border-bottom: 1px solid #333;
+        }
+
+        /* Submenu */
+        .submenu {
+    list-style: none;
+    background: #222;
+    margin-top: 0px;
+    border-radius: 8px;
+    max-height: 0; /* Mặc định ẩn */
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+
+/* Khi mở ra thông qua class open */
+.submenu.open {
+    max-height: 250px; 
+    padding: 10px 15px;
+    opacity: 1;
+    margin-bottom: 10px;
+}
+
+.submenu li a {
+    font-size: 15px !important;
+    color: #bbb !important;
+    text-transform: capitalize !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+.submenu li:last-child a {
+    border-bottom: none !important;
+}
+        .arrow-icon { transition: 0.3s; }
+        .arrow-icon.rotate { transform: rotate(180deg); }
+
+        /* Search Bar */
+        .search-wrapper {
+            position: fixed; top: -100px; left: 0; width: 100%; background: #fff;
+            padding: 25px 8%; display: flex; align-items: center; z-index: 2001;
+            transition: 0.4s; visibility: hidden; opacity: 0;
+        }
+        .search-wrapper.active { top: 0; visibility: visible; opacity: 1; }
+        .search-wrapper input { flex: 1; border: none; outline: none; font-size: 18px; color: #000; }
+        .search-wrapper i { color: #000 !important; cursor: pointer; font-size: 20px; margin-left: 20px; }
+
+        /* Overlays */
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7); z-index: 2500; opacity: 0; visibility: hidden; transition: 0.3s;
+        }
+        .cart-overlay.active { opacity: 1; visibility: visible; }
 
         /* --- ABOUT HEADER --- */
         .about-header {
@@ -39,6 +112,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding-top: 80px;
         }
         .about-header h1 { font-size: 3.5rem; letter-spacing: 8px; text-transform: uppercase; }
 
@@ -97,23 +171,67 @@
             .story-grid { flex-direction: column; }
             .footer-container { grid-template-columns: 1fr; gap: 50px; }
         }
+/* --- OVERLAY (Màn hình đen mờ) --- */
+        .global-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Độ đen của màn hình */
+            z-index: 2500; visibility: hidden; opacity: 0; transition: 0.3s;
+        }
+        .global-overlay.active { visibility: visible; opacity: 1; }
     </style>
 </head>
 <body>
-
+<div class="global-overlay" id="globalOverlay" onclick="closeAllSidebars()"></div>
     <nav class="navbar" id="mainNavbar">
-        <div class="logo-container"><a href="index.html"><img src="Prs_guitars_logo.png"></a></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="products.html">Sản Phẩm</a></li>
-            <li><a href="about.html">Giới Thiệu</a></li>
-            <li><a href="#footer">Liên Hệ</a></li>
-        </ul>
+        <div class="nav-left">
+            <i class="fas fa-bars menu-icon" onclick="toggleMobileMenu()"></i>
+            <div class="lang-switch">VN | EN</div>
+        </div>
+        <div class="logo-container">
+            <a href="index.html"><img src="Prs_guitars_logo.png" alt="Logo"></a>
+        </div>
         <div class="nav-icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-bag"></i>
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div onclick="toggleCart()" style="cursor:pointer; position: relative;">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
         </div>
     </nav>
+
+    <ul class="nav-links" id="navLinks">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+            <h3 style="color: #c0392b; letter-spacing: 2px;">MENU</h3>
+            <i class="fas fa-times" onclick="toggleMobileMenu()" style="cursor:pointer; font-size: 24px; color: #fff;"></i>
+        </div>
+        <li><a href="index.html">Trang chủ</a></li>
+        <li>
+            <div onclick="toggleSubmenu(event)" style="display: flex; justify-content: space-between; cursor: pointer; color: #fff; font-weight: 600; padding: 12px 0; border-bottom: 1px solid #333;">
+                SẢN PHẨM <i class="fas fa-chevron-down arrow-icon" id="submenuArrow"></i>
+            </div>
+            <ul class="submenu" id="productSubmenu">
+                <li><a href="products.html#guitar" onclick="toggleMobileMenu()">Guitar</a></li>
+                <li><a href="products.html#cable" onclick="toggleMobileMenu()">Cable</a></li>
+                <li><a href="products.html#strings" onclick="toggleMobileMenu()">Strings</a></li>
+                <li><a href="products.html#picks" onclick="toggleMobileMenu()">Picks</a></li>
+            </ul>
+        </li>
+        <li><a href="about.html">Giới Thiệu</a></li>
+        <li><a href="#footer" onclick="toggleMobileMenu()">Liên Hệ</a></li>
+    </ul>
+
+    <div class="side-cart" id="sideCart">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+            <h3>GIỎ HÀNG</h3>
+            <i class="fas fa-times" onclick="toggleCart()" style="cursor:pointer; font-size: 24px;"></i>
+        </div>
+        <div id="cartContent" style="color: #888;">Hiện chưa có sản phẩm nào.</div>
+    </div>
+
+    <div class="search-wrapper" id="searchBar">
+        <input type="text" placeholder="Tìm kiếm sản phẩm PRS...">
+        <i class="fas fa-times" onclick="toggleSearch()"></i>
+    </div>
 
     <header class="about-header">
         <h1>Về Chúng Tôi</h1>
@@ -163,37 +281,65 @@
     </footer>
 
     <script>
+        // 1. Hàm đóng tất cả khi chạm vào vùng đen
+function closeAllSidebars() {
+    document.getElementById('navLinks').classList.remove('active');
+    document.getElementById('sideCart').classList.remove('active');
+    document.getElementById('searchBar').classList.remove('active');
+    document.getElementById('globalOverlay').classList.remove('active');
+}
+
+// 2. Sửa hàm mở Menu (Ví dụ)
+function toggleMobileMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+    document.getElementById('globalOverlay').classList.toggle('active'); // Bật/tắt màn đen
+}
+
+// 3. Sửa hàm mở Giỏ hàng
+function toggleCart() {
+    document.getElementById('sideCart').classList.toggle('active');
+    document.getElementById('globalOverlay').classList.toggle('active'); // Bật/tắt màn đen
+}
+        // Điều khiển cuộn
         window.onscroll = function() {
             let nav = document.getElementById('mainNavbar');
             if (window.pageYOffset > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
         };
+
+
+        // Hàm bật/tắt Tìm kiếm
+        function toggleSearch() {
+            document.getElementById('searchBar').classList.toggle('active');
+        }
+
+        // Hàm bật/tắt Submenu
+        function toggleSubmenu(event) {
+            event.stopPropagation();
+            document.getElementById('productSubmenu').classList.toggle('open');
+            document.getElementById('submenuArrow').classList.toggle('rotate');
+        }
+
+        // Giữ nguyên hàm gửi form của Hải
         function submitContact(event) {
-    event.preventDefault();
-    const btn = event.target.querySelector('button');
-    btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
-
-    const data = {
-        "Họ tên": document.getElementById('contactName').value,
-        "Email": document.getElementById('contactEmail').value,
-        "Lời nhắn": document.getElementById('contactMessage').value,
-        "Nguồn": "Form liên hệ chân trang"
-    };
-
-    // Sử dụng link Formspree của bạn
-    fetch("https://formspree.io/f/mbdpdrbb", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-    }).then(() => {
-        alert("Cảm ơn bạn! Thông tin đã được gửi thành công.");
-        document.getElementById('contactForm').reset();
-    }).catch(() => {
-        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-    }).finally(() => {
-        btn.innerText = "GỬI THÔNG TIN"; btn.disabled = false;
-    });
-}
+            event.preventDefault();
+            const btn = event.target.querySelector('button');
+            btn.innerText = "ĐANG GỬI..."; btn.disabled = true;
+            fetch("https://formspree.io/f/mbdpdrbb", {
+                method: "POST",
+                body: JSON.stringify({
+                    "Họ tên": document.getElementById('contactName').value,
+                    "Email": document.getElementById('contactEmail').value,
+                    "Lời nhắn": document.getElementById('contactMessage').value
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(() => {
+                alert("Cảm ơn bạn! Thông tin đã được gửi thành công.");
+                document.getElementById('contactForm').reset();
+            }).finally(() => {
+                btn.innerText = "GỬI THÔNG TIN"; btn.disabled = false;
+            });
+        }
     </script>
 </body>
 </html>
