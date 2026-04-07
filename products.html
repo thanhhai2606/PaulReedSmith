@@ -634,6 +634,48 @@
 .navbar.scrolled .dropdown-menu li a:hover {
     background-color: #f5f5f5;
 }
+
+/* Tối ưu cho Điện thoại và Máy tính bảng */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 5% !important; /* Giảm khoảng cách trống */
+        flex-wrap: wrap; /* Cho phép các thành phần tự xuống dòng nếu cần */
+    }
+
+    .logo-container img {
+        height: 35px !important; /* Thu nhỏ logo để nhường chỗ cho menu */
+    }
+
+    .nav-links {
+        display: none; /* Ẩn các dòng chữ menu (Trang chủ, Sản phẩm...) trên mobile để tránh tràn */
+    }
+
+    .nav-right {
+        gap: 15px !important; /* Thu hẹp khoảng cách giữa Giỏ hàng và User */
+    }
+
+    .nav-right i {
+        font-size: 1.2rem; /* Thu nhỏ icon một chút */
+    }
+
+    /* Nếu bạn muốn hiện menu chữ trên mobile theo dạng danh sách, 
+       cần thêm nút Hamburger, nhưng trước mắt hãy ẩn đi để giao diện gọn gàng */
+}
+
+/* Tối ưu cho điện thoại cực nhỏ (iPhone SE, v.v.) */
+@media (max-width: 480px) {
+    .logo-container span {
+        display: none; /* Ẩn chữ "PRS Guitars VN" chỉ để lại Logo ảnh trên máy nhỏ */
+    }
+}
+@media (max-width: 768px) {
+    .cart-count {
+        right: -5px; /* Điều chỉnh vị trí số lượng giỏ hàng cho khít */
+        top: -5px;
+        padding: 2px 5px;
+        font-size: 10px;
+    }
+}
     </style>
 </head>
 <body>
