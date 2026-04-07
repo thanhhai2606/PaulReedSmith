@@ -510,22 +510,22 @@
         <div class="product-card" data-name="SE Series">
             <img src="PRS_Guitars___Modern_Eagle_V_-_2024.webp">
             <div class="product-info"><h3>SE Series</h3></div>
-            <a href="products.html#SE-Series" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+            <a href="products.html#SE-Series" class="shop-now-btn" style="text-decoration: none; text-align: center;" data-key="Morebtn";>Xem Thêm</a>
         </div>
         <div class="product-card" data-name="Bolt-On-Electric">
             <img src="Fiore-HH-Midnight-Metallic_d-2048x1365.jpg">
             <div class="product-info"><h3>Bolt On Electric</h3></div>
-            <a href="products.html#Bolt-On-Electric" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+            <a href="products.html#Bolt-On-Electric" class="shop-now-btn" style="text-decoration: none; text-align: center;" data-key="Morebtn";>Xem Thêm</a>
         </div>
         <div class="product-card" data-name="S2 Series">
             <img src="H2_Vela_HHT.webp">
             <div class="product-info"><h3>S2 Series</h3></div>
-            <a href="products.html#S2-Series" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+            <a href="products.html#S2-Series" class="shop-now-btn" style="text-decoration: none; text-align: center;" data-key="Morebtn";>Xem Thêm</a>
         </div>
         <div class="product-card" data-name="SE Acoustic">
             <img src="prs_acoutic.jpg">
             <div class="product-info"><h3>SE Acoustic</h3></div>
-            <a href="products.html#SE-Acoustics" class="shop-now-btn" style="text-decoration: none; text-align: center;">Xem Thêm</a>
+            <a href="products.html#SE-Acoustics" class="shop-now-btn" style="text-decoration: none; text-align: center;" data-key="Morebtn";>Xem Thêm</a>
         </div>
     </section>
 
@@ -635,7 +635,16 @@ const langData = {
         about: "Giới thiệu",
         contact: "Liên hệ",
         cartTitle: "GIỎ HÀNG",
-        cartEmpty: "Trống."
+        cartEmpty: "Trống.",
+        Morebtn: "Xem Thêm",
+        // Footer //
+        footerSlogan: "Lan tỏa đam mê, kết nối nghệ sĩ.",
+        footerAddress: "Địa chỉ: Quang Trung, Thông Tây Hội, TP.HCM",
+        footerContactTitle: "LIÊN HỆ VỚI CHÚNG TÔI",
+        footerNamePlace: "Họ và tên",
+        footerMsgPlace: "Lời nhắn...",
+        footerSendBtn: "GỬI THÔNG TIN",
+        footerMailPlace: "Email của bạn",
     },
     en: {
         home: "Home",
@@ -643,7 +652,16 @@ const langData = {
         about: "About Us",
         contact: "Contact",
         cartTitle: "SHOPPING CART",
-        cartEmpty: "Empty."
+        cartEmpty: "Empty.",
+        Morebtn: "More",
+        // Footer //
+        footerSlogan: "Spreading passion, connecting artists.",
+        footerAddress: "Address: Quang Trung, Thong Tay Hoi, TP.HCM",
+        footerContactTitle: "CONTACT US",
+        footerNamePlace: "Full name",
+        footerMsgPlace: "Message...",
+        footerSendBtn: "SEND",
+        footerMailPlace: "Your Email",
     }
 };
 
@@ -652,19 +670,26 @@ function changeLang(lang) {
     document.getElementById('lang-vi').classList.toggle('active', lang === 'vi');
     document.getElementById('lang-en').classList.toggle('active', lang === 'en');
 
-    // 2. Đổi nội dung Menu chính
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-        const key = link.getAttribute('data-key');
+    // 2. Duyệt tất cả phần tử có thuộc tính data-key
+    const elements = document.querySelectorAll('[data-key]');
+    
+    elements.forEach(el => {
+        const key = el.getAttribute('data-key');
         if (langData[lang][key]) {
-            link.innerText = langData[lang][key];
+            // Kiểm tra nếu là thẻ input hoặc textarea thì đổi placeholder
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = langData[lang][key];
+            } else {
+                // Ngược lại thì đổi nội dung text
+                el.innerText = langData[lang][key];
+            }
         }
     });
 
-    // 3. Đổi tiêu đề Giỏ hàng và Search
+    // 3. Giữ nguyên phần đổi tiêu đề giỏ hàng (vì nó không có data-key)
     document.querySelector('.side-cart h3').innerText = langData[lang].cartTitle;
     document.getElementById('searchInput').placeholder = (lang === 'vi') ? "Tìm kiếm sản phẩm..." : "Search products...";
-    document.getElementById('cartContent').innerText = (lang === 'vi') ? "Trống." : "Empty.";
+    // document.getElementById('cartContent').innerText = (lang === 'vi') ? "Trống." : "Empty.";
 }
 
     </script>
@@ -672,9 +697,9 @@ function changeLang(lang) {
     <div class="footer-container">
         <div class="footer-info">
             <h2>PRS GUITARS VN</h2>
-            <p>Lan tỏa đam mê, kết nối nghệ sĩ.</p>
+            <p data-key="footerSlogan">Lan tỏa đam mê, kết nối nghệ sĩ.</p>
             <p>Hotline: 0124.567.89</p>
-            <p>Địa chỉ: Quang Trung, Thông Tây Hội, TP.HCM</p>
+            <p data-key="footerAddress">Địa chỉ: Quang Trung, Thông Tây Hội, TP.HCM</p>
             <p>Email: wangz.thanhhai@gmail.com</p>
             <div class="social-links">
                 <a href="https://www.facebook.com/TayWangz/"><i class="fab fa-facebook"></i></a>
@@ -684,12 +709,12 @@ function changeLang(lang) {
         </div>
 
         <div class="footer-form">
-    <h3>LIÊN HỆ VỚI CHÚNG TÔI</h3>
+    <h3 data-key="footerContactTitle">LIÊN HỆ VỚI CHÚNG TÔI</h3>
     <form id="contactForm" onsubmit="submitContact(event)">
-        <input type="text" id="contactName" placeholder="Họ và tên" required>
-        <input type="email" id="contactEmail" placeholder="Email của bạn" required>
-        <textarea id="contactMessage" placeholder="Lời nhắn..." rows="4" required></textarea>
-        <button type="submit" class="send-btn">GỬI THÔNG TIN</button>
+        <input type="text" id="contactName" data-key="footerNamePlace" placeholder="Họ và tên" required>
+        <input type="email" id="contactEmail" data-key="footerMailPlace" placeholder="Email của bạn" required>
+        <textarea id="contactMessage" data-key="footerMsgPlace" placeholder="Lời nhắn..." rows="4" required></textarea>
+        <button type="submit" class="send-btn" data-key="footerSendBtn">GỬI THÔNG TIN</button>
     </form>
         </div>
     </div>
